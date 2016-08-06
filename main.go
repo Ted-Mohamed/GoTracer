@@ -13,7 +13,6 @@ func check(e error, message string) {
 }
 
 func main() {
-	type Color struct{ r, g, b int }
 
 	width := 600
 	height := 600
@@ -30,13 +29,13 @@ func main() {
 	for y := height - 1; y >= 0; y-- {
 		for x := 0; x < width; x++ {
 
-			c := Color{
-				r: int(255.99 * float64(x) / float64(width)),
-				g: int(255.99 * float64(y) / float64(height)),
-				b: 127,
+			c := Vector3D{
+				255.99 * float64(x) / float64(width),
+				255.99 * float64(y) / float64(height),
+				127,
 			}
 
-			_, err = fmt.Fprintf(file, "%d %d %d\n", c.r, c.g, c.b)
+			_, err = fmt.Fprintf(file, "%d %d %d\n", int(c.X()), int(c.Y()), int(c.Z()))
 
 			check(err, "Could not write to file: %v\n")
 		}
